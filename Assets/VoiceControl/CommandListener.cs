@@ -44,11 +44,11 @@ public class CommandListener : MonoBehaviour
     }
 
     private void dictationResult(string text, ConfidenceLevel confidence) {
-        Debug.Log(text + "     (confidence " + confidence + ")");
+        CommandDebugController.instance.newCommand(text);
     }
 
     private void dictationHypothesis(string text) {
-        // do something
+        CommandDebugController.instance.newHypothesis(text);
     }
 
     private void dictationComplete(DictationCompletionCause cause) {
