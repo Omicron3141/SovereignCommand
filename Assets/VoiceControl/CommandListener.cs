@@ -22,6 +22,8 @@ public class CommandListener : MonoBehaviour
         }
     }
 
+    public bool debug = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,11 +53,15 @@ public class CommandListener : MonoBehaviour
     }
 
     private void dictationResult(string text, ConfidenceLevel confidence) {
-        CommandDebugController.instance.newCommand(text, confidence);
+        if (debug) {
+            CommandDebugController.instance.newCommand(text, confidence);
+        }
     }
 
     private void dictationHypothesis(string text) {
-        CommandDebugController.instance.newHypothesis(text);
+        if (debug) {
+            CommandDebugController.instance.newHypothesis(text);
+        }
     }
 
     private void dictationComplete(DictationCompletionCause cause) {
