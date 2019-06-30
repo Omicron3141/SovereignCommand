@@ -5,6 +5,7 @@ using UnityEngine.Windows.Speech;
 
 public class CommandListener : MonoBehaviour
 {
+    public static CommandListener instance;
 
     DictationRecognizer dictationRecognizer;
 
@@ -24,6 +25,12 @@ public class CommandListener : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (instance != this) {
+            instance = this;
+        } else {
+            Destroy(gameObject);
+        }
+
         dictationRecognizer = new DictationRecognizer();
 
         dictationRecognizer.DictationResult += dictationResult;
@@ -44,7 +51,7 @@ public class CommandListener : MonoBehaviour
     }
 
     private void dictationResult(string text, ConfidenceLevel confidence) {
-        CommandDebugController.instance.newCommand(text);
+        CommandDebugController.instance.newCommand(text, confidence);
     }
 
     private void dictationHypothesis(string text) {
